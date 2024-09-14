@@ -1,14 +1,29 @@
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+
+import Home from "./Routes/Home";
+import Contact from "./Routes/Contact";
+import Detail from "./Routes/Detail";
+import Favs from "./Routes/Favs";
 
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 
+import { ContextProvider } from "./context/GlobalContext";
 
 function App() {
   return (
-      <div className="App">
-          <Navbar/>
-          <Footer/>
-      </div>
+    <ContextProvider>
+      <Router>
+        <Navbar/>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/contact" element={<Contact/>}/>
+          <Route path="/dentist/:id" element={<Detail/>}/>
+          <Route path="/favs" element={<Favs/>}/>
+        </Routes>
+        <Footer/>
+      </Router>
+    </ContextProvider>
   );
 }
 

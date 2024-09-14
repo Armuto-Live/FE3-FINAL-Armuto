@@ -1,20 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
+const Card = ({ name, username, id, addFav, theme }) => {
 
-const Card = ({ name, username, id }) => {
-
-  const addFav = ()=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
+  const handleAddFav = () => {
+    const dentist = { name, username, id };
+    addFav(dentist);
   }
 
   return (
-    <div className="card">
-        {/* En cada card deberan mostrar en name - username y el id */}
-
-        {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-
-        {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className="favButton">Add fav</button>
+    <div key={id} className={`card ${theme}`}>
+      <img src="https://cdn-icons-png.flaticon.com/512/6620/6620101.png" alt="doc" className="card__image" /> 
+      <h3>{name}</h3>
+      <p>{username}</p>
+      <div style={{width: "100%", display:"flex", justifyContent:"flex-end"}}><Link to={`/dentist/${id}`} className={`card-link ${theme}`}>Ver detalle {'>'} </Link></div>
+      
+      <button onClick={handleAddFav} className={`favButton ${theme}`}>Agregar a favoritos</button>
     </div>
   );
 };
